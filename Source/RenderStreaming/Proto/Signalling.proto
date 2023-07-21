@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+message PlayerConnectedMsg {
+    string playerId = 1;
+}
+
+message OfferMsg {
+    string playerId = 1;
+	string sdp = 2;
+}
+
+message AnswerMsg {
+	string playerId = 1;
+	string sdp = 2;
+}
+
+message Empty {
+}
+
+message PingMsg {
+    string message = 1;
+}
+
+message PongMsg {
+    string message = 2;
+}
+
+service SignallingService {
+    rpc Ping(PingMsg) returns (PongMsg) {}
+
+    rpc Offer(OfferMsg) returns (Empty) {}
+
+    rpc Answer(AnswerMsg) returns (Empty) {}
+}

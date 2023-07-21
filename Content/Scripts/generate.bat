@@ -1,0 +1,2 @@
+F:\Work\Git\UnrealEngine\Engine\Source\ThirdParty\Protobuf\Bin\protoc.exe -I "../../Source/RenderStreaming/Proto" --grpc_out="../../Source/RenderStreaming/Private/Generated" --plugin=protoc-gen-grpc="F:\Work\Git\UnrealEngine\Engine\Source\ThirdParty\gRPC\Bin\grpc_cpp_plugin.exe" "../../Source/RenderStreaming/Proto/Signalling.proto"
+F:\Work\Git\UnrealEngine\Engine\Source\ThirdParty\Protobuf\Bin\protoc.exe -I "../../Source/RenderStreaming/Proto" --cpp_out="../../Source/RenderStreaming/Private/Generated" "../../Source/RenderStreaming/Proto/Signalling.proto"
