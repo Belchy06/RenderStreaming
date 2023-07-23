@@ -27,6 +27,18 @@ struct EmptyDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT EmptyDefaultTypeInternal _Empty_default_instance_;
+constexpr Streamer::Streamer(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+struct StreamerDefaultTypeInternal {
+  constexpr StreamerDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~StreamerDefaultTypeInternal() {}
+  union {
+    Streamer _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StreamerDefaultTypeInternal _Streamer_default_instance_;
 constexpr PeerConfig::PeerConfig(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : peerconnectionoptions_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
@@ -41,7 +53,7 @@ struct PeerConfigDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PeerConfigDefaultTypeInternal _PeerConfig_default_instance_;
 constexpr PlayerConnected::PlayerConnected(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : playerid_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+  : id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
 struct PlayerConnectedDefaultTypeInternal {
   constexpr PlayerConnectedDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -51,7 +63,20 @@ struct PlayerConnectedDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PlayerConnectedDefaultTypeInternal _PlayerConnected_default_instance_;
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Signalling_2eproto[3];
+constexpr Offer::Offer(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , sdp_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+struct OfferDefaultTypeInternal {
+  constexpr OfferDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~OfferDefaultTypeInternal() {}
+  union {
+    Offer _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT OfferDefaultTypeInternal _Offer_default_instance_;
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Signalling_2eproto[5];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_Signalling_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_Signalling_2eproto = nullptr;
 
@@ -62,6 +87,13 @@ const uint32_t TableStruct_Signalling_2eproto::offsets[] PROTOBUF_SECTION_VARIAB
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Streamer, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Streamer, id_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::PeerConfig, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -75,33 +107,50 @@ const uint32_t TableStruct_Signalling_2eproto::offsets[] PROTOBUF_SECTION_VARIAB
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::PlayerConnected, playerid_),
+  PROTOBUF_FIELD_OFFSET(::PlayerConnected, id_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Offer, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Offer, id_),
+  PROTOBUF_FIELD_OFFSET(::Offer, sdp_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Empty)},
-  { 6, -1, -1, sizeof(::PeerConfig)},
-  { 13, -1, -1, sizeof(::PlayerConnected)},
+  { 6, -1, -1, sizeof(::Streamer)},
+  { 13, -1, -1, sizeof(::PeerConfig)},
+  { 20, -1, -1, sizeof(::PlayerConnected)},
+  { 27, -1, -1, sizeof(::Offer)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_Empty_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_Streamer_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_PeerConfig_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_PlayerConnected_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_Offer_default_instance_),
 };
 
 const char descriptor_table_protodef_Signalling_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\020Signalling.proto\"\007\n\005Empty\"+\n\nPeerConfi"
-  "g\022\035\n\025peerConnectionOptions\030\001 \001(\t\"#\n\017Play"
-  "erConnected\022\020\n\010playerId\030\001 \001(\t2\206\001\n\nSignal"
-  "ling\022\033\n\007Connect\022\006.Empty\032\006.Empty\"\000\022\037\n\006Con"
-  "fig\022\006.Empty\032\013.PeerConfig\"\000\022:\n\032SubscribeT"
-  "oPlayerConnected\022\006.Empty\032\020.PlayerConnect"
-  "ed\"\0000\001B\016Z\014./signallingb\006proto3"
+  "\n\020Signalling.proto\"\007\n\005Empty\"\026\n\010Streamer\022"
+  "\n\n\002id\030\001 \001(\t\"+\n\nPeerConfig\022\035\n\025peerConnect"
+  "ionOptions\030\001 \001(\t\"\035\n\017PlayerConnected\022\n\n\002i"
+  "d\030\001 \001(\t\" \n\005Offer\022\n\n\002id\030\001 \001(\t\022\013\n\003sdp\030\002 \001("
+  "\t2\216\002\n\nSignalling\022\037\n\006Config\022\006.Empty\032\013.Pee"
+  "rConfig\"\000\022!\n\rConnectPlayer\022\006.Empty\032\006.Emp"
+  "ty\"\000\0221\n\033SubscribeToApplicationOffer\022\006.Em"
+  "pty\032\006.Offer\"\0000\001\022&\n\017ConnectStreamer\022\t.Str"
+  "eamer\032\006.Empty\"\000\022:\n\032SubscribeToPlayerConn"
+  "ected\022\006.Empty\032\020.PlayerConnected\"\0000\001\022%\n\021S"
+  "endOfferToPlayer\022\006.Offer\032\006.Empty\"\000B\016Z\014./"
+  "signallingb\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Signalling_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Signalling_2eproto = {
-  false, false, 270, descriptor_table_protodef_Signalling_2eproto, "Signalling.proto", 
-  &descriptor_table_Signalling_2eproto_once, nullptr, 0, 3,
+  false, false, 458, descriptor_table_protodef_Signalling_2eproto, "Signalling.proto", 
+  &descriptor_table_Signalling_2eproto_once, nullptr, 0, 5,
   schemas, file_default_instances, TableStruct_Signalling_2eproto::offsets,
   file_level_metadata_Signalling_2eproto, file_level_enum_descriptors_Signalling_2eproto, file_level_service_descriptors_Signalling_2eproto,
 };
@@ -149,6 +198,209 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Empty::GetClassData() const { 
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_Signalling_2eproto_getter, &descriptor_table_Signalling_2eproto_once,
       file_level_metadata_Signalling_2eproto[0]);
+}
+
+// ===================================================================
+
+class Streamer::_Internal {
+ public:
+};
+
+Streamer::Streamer(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor();
+  if (!is_message_owned) {
+    RegisterArenaDtor(arena);
+  }
+  // @@protoc_insertion_point(arena_constructor:Streamer)
+}
+Streamer::Streamer(const Streamer& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_id().empty()) {
+    id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_id(), 
+      GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(copy_constructor:Streamer)
+}
+
+inline void Streamer::SharedCtor() {
+id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+Streamer::~Streamer() {
+  // @@protoc_insertion_point(destructor:Streamer)
+  if (GetArenaForAllocation() != nullptr) return;
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+inline void Streamer::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void Streamer::ArenaDtor(void* object) {
+  Streamer* _this = reinterpret_cast< Streamer* >(object);
+  (void)_this;
+}
+void Streamer::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void Streamer::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void Streamer::Clear() {
+// @@protoc_insertion_point(message_clear_start:Streamer)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  id_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* Streamer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_id();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "Streamer.id"));
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* Streamer::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Streamer)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string id = 1;
+  if (!this->_internal_id().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_id().data(), static_cast<int>(this->_internal_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Streamer.id");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_id(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Streamer)
+  return target;
+}
+
+size_t Streamer::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Streamer)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string id = 1;
+  if (!this->_internal_id().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_id());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Streamer::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    Streamer::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Streamer::GetClassData() const { return &_class_data_; }
+
+void Streamer::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<Streamer *>(to)->MergeFrom(
+      static_cast<const Streamer &>(from));
+}
+
+
+void Streamer::MergeFrom(const Streamer& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Streamer)
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_id().empty()) {
+    _internal_set_id(from._internal_id());
+  }
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void Streamer::CopyFrom(const Streamer& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Streamer)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Streamer::IsInitialized() const {
+  return true;
+}
+
+void Streamer::InternalSwap(Streamer* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      &id_, lhs_arena,
+      &other->id_, rhs_arena
+  );
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata Streamer::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_Signalling_2eproto_getter, &descriptor_table_Signalling_2eproto_once,
+      file_level_metadata_Signalling_2eproto[1]);
 }
 
 // ===================================================================
@@ -351,7 +603,7 @@ void PeerConfig::InternalSwap(PeerConfig* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata PeerConfig::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_Signalling_2eproto_getter, &descriptor_table_Signalling_2eproto_once,
-      file_level_metadata_Signalling_2eproto[1]);
+      file_level_metadata_Signalling_2eproto[2]);
 }
 
 // ===================================================================
@@ -372,21 +624,21 @@ PlayerConnected::PlayerConnected(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 PlayerConnected::PlayerConnected(const PlayerConnected& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  playerid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    playerid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+    id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_playerid().empty()) {
-    playerid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_playerid(), 
+  if (!from._internal_id().empty()) {
+    id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_id(), 
       GetArenaForAllocation());
   }
   // @@protoc_insertion_point(copy_constructor:PlayerConnected)
 }
 
 inline void PlayerConnected::SharedCtor() {
-playerid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  playerid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -399,7 +651,7 @@ PlayerConnected::~PlayerConnected() {
 
 inline void PlayerConnected::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  playerid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void PlayerConnected::ArenaDtor(void* object) {
@@ -418,7 +670,7 @@ void PlayerConnected::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  playerid_.ClearToEmpty();
+  id_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -428,12 +680,12 @@ const char* PlayerConnected::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPAC
     uint32_t tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string playerId = 1;
+      // string id = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_playerid();
+          auto str = _internal_mutable_id();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "PlayerConnected.playerId"));
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "PlayerConnected.id"));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -467,14 +719,14 @@ uint8_t* PlayerConnected::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string playerId = 1;
-  if (!this->_internal_playerid().empty()) {
+  // string id = 1;
+  if (!this->_internal_id().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_playerid().data(), static_cast<int>(this->_internal_playerid().length()),
+      this->_internal_id().data(), static_cast<int>(this->_internal_id().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "PlayerConnected.playerId");
+      "PlayerConnected.id");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_playerid(), target);
+        1, this->_internal_id(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -493,11 +745,11 @@ size_t PlayerConnected::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string playerId = 1;
-  if (!this->_internal_playerid().empty()) {
+  // string id = 1;
+  if (!this->_internal_id().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_playerid());
+        this->_internal_id());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -522,8 +774,8 @@ void PlayerConnected::MergeFrom(const PlayerConnected& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_playerid().empty()) {
-    _internal_set_playerid(from._internal_playerid());
+  if (!from._internal_id().empty()) {
+    _internal_set_id(from._internal_id());
   }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -546,15 +798,267 @@ void PlayerConnected::InternalSwap(PlayerConnected* other) {
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      &playerid_, lhs_arena,
-      &other->playerid_, rhs_arena
+      &id_, lhs_arena,
+      &other->id_, rhs_arena
   );
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata PlayerConnected::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_Signalling_2eproto_getter, &descriptor_table_Signalling_2eproto_once,
-      file_level_metadata_Signalling_2eproto[2]);
+      file_level_metadata_Signalling_2eproto[3]);
+}
+
+// ===================================================================
+
+class Offer::_Internal {
+ public:
+};
+
+Offer::Offer(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor();
+  if (!is_message_owned) {
+    RegisterArenaDtor(arena);
+  }
+  // @@protoc_insertion_point(arena_constructor:Offer)
+}
+Offer::Offer(const Offer& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_id().empty()) {
+    id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_id(), 
+      GetArenaForAllocation());
+  }
+  sdp_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    sdp_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_sdp().empty()) {
+    sdp_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_sdp(), 
+      GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(copy_constructor:Offer)
+}
+
+inline void Offer::SharedCtor() {
+id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+sdp_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  sdp_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+Offer::~Offer() {
+  // @@protoc_insertion_point(destructor:Offer)
+  if (GetArenaForAllocation() != nullptr) return;
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+inline void Offer::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  sdp_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void Offer::ArenaDtor(void* object) {
+  Offer* _this = reinterpret_cast< Offer* >(object);
+  (void)_this;
+}
+void Offer::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void Offer::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void Offer::Clear() {
+// @@protoc_insertion_point(message_clear_start:Offer)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  id_.ClearToEmpty();
+  sdp_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* Offer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_id();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "Offer.id"));
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string sdp = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_sdp();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "Offer.sdp"));
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* Offer::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Offer)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string id = 1;
+  if (!this->_internal_id().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_id().data(), static_cast<int>(this->_internal_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Offer.id");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_id(), target);
+  }
+
+  // string sdp = 2;
+  if (!this->_internal_sdp().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_sdp().data(), static_cast<int>(this->_internal_sdp().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Offer.sdp");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_sdp(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Offer)
+  return target;
+}
+
+size_t Offer::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Offer)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string id = 1;
+  if (!this->_internal_id().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_id());
+  }
+
+  // string sdp = 2;
+  if (!this->_internal_sdp().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_sdp());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Offer::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    Offer::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Offer::GetClassData() const { return &_class_data_; }
+
+void Offer::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<Offer *>(to)->MergeFrom(
+      static_cast<const Offer &>(from));
+}
+
+
+void Offer::MergeFrom(const Offer& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Offer)
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_id().empty()) {
+    _internal_set_id(from._internal_id());
+  }
+  if (!from._internal_sdp().empty()) {
+    _internal_set_sdp(from._internal_sdp());
+  }
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void Offer::CopyFrom(const Offer& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Offer)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Offer::IsInitialized() const {
+  return true;
+}
+
+void Offer::InternalSwap(Offer* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      &id_, lhs_arena,
+      &other->id_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      &sdp_, lhs_arena,
+      &other->sdp_, rhs_arena
+  );
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata Offer::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_Signalling_2eproto_getter, &descriptor_table_Signalling_2eproto_once,
+      file_level_metadata_Signalling_2eproto[4]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -562,11 +1066,17 @@ PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::Empty* Arena::CreateMaybeMessage< ::Empty >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Empty >(arena);
 }
+template<> PROTOBUF_NOINLINE ::Streamer* Arena::CreateMaybeMessage< ::Streamer >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Streamer >(arena);
+}
 template<> PROTOBUF_NOINLINE ::PeerConfig* Arena::CreateMaybeMessage< ::PeerConfig >(Arena* arena) {
   return Arena::CreateMessageInternal< ::PeerConfig >(arena);
 }
 template<> PROTOBUF_NOINLINE ::PlayerConnected* Arena::CreateMaybeMessage< ::PlayerConnected >(Arena* arena) {
   return Arena::CreateMessageInternal< ::PlayerConnected >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Offer* Arena::CreateMaybeMessage< ::Offer >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Offer >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

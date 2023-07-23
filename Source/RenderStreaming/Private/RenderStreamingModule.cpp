@@ -1,12 +1,16 @@
 #include "RenderStreamingModule.h"
 
+#include "rtc_base/ssl_adapter.h"
+
 DECLARE_LOG_CATEGORY_EXTERN(LogRenderStreamingModule, Log, All);
 DEFINE_LOG_CATEGORY(LogRenderStreamingModule);
 
 void FRenderStreamingModule::StartupModule()
 {
     FCoreDelegates::OnFEngineLoopInitComplete.AddLambda([this]()
-                                                        { Streamer = MakeUnique<FRenderStreamingStreamer>(); });
+
+                                                        { rtc::InitializeSSL();
+                                                        this->Streamer = MakeUnique<FRenderStreamingStreamer>(); });
 }
 
 void FRenderStreamingModule::ShutdownModule()

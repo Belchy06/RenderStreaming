@@ -40,7 +40,8 @@ namespace UnrealBuildTool.Rules
                 "Core",
                 "Engine",
                 "PixelStreaming",
-                "WebRTC"
+                "WebRTC",
+                "Json"
             });
 
             string ThirdPartyPath = "F:/Work/Git/UnrealEngine/Engine/Source/ThirdParty";

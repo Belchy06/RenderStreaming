@@ -5,20 +5,32 @@ option go_package = "./signalling";
 message Empty {
 }
 
+message Streamer {
+    string id = 1;
+}
+
 message PeerConfig {
     string peerConnectionOptions = 1;
 }
 
 message PlayerConnected {
-    string playerId = 1;
+    string id = 1;
+}
+
+message Offer {
+    string id = 1;
+    string sdp = 2;
 }
 
 service Signalling {
-    rpc Connect(Empty) returns (Empty) {}
     rpc Config(Empty) returns (PeerConfig) {}
 
     // Viewer
+    rpc ConnectPlayer(Empty) returns (Empty) {}
+    rpc SubscribeToApplicationOffer(Empty) returns (stream Offer) {}
     
     // Application
+    rpc ConnectStreamer(Streamer) returns (Empty) {}
     rpc SubscribeToPlayerConnected(Empty) returns (stream PlayerConnected) {}
+    rpc SendOfferToPlayer(Offer) returns (Empty) {}
 }

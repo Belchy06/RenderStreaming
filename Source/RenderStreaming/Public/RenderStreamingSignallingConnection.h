@@ -14,6 +14,7 @@ public:
     FRenderStreamingSignallingConnection(TSharedPtr<IPixelStreamingSignallingConnectionObserver> InObserver);
 
     void RequestConfig();
+    void SubscribeToPlayerConnected();
 
     /** IPixelStreamingSignallingConnection Interface */
     virtual void TryConnect(FString URL) override;

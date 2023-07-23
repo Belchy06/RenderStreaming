@@ -21,9 +21,12 @@
 #include <grpcpp/impl/codegen/sync_stream.h>
 
 static const char* Signalling_method_names[] = {
-  "/Signalling/Connect",
   "/Signalling/Config",
+  "/Signalling/ConnectPlayer",
+  "/Signalling/SubscribeToApplicationOffer",
+  "/Signalling/ConnectStreamer",
   "/Signalling/SubscribeToPlayerConnected",
+  "/Signalling/SendOfferToPlayer",
 };
 
 std::unique_ptr< Signalling::Stub> Signalling::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -33,33 +36,13 @@ std::unique_ptr< Signalling::Stub> Signalling::NewStub(const std::shared_ptr< ::
 }
 
 Signalling::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_Connect_(Signalling_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_Config_(Signalling_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_SubscribeToPlayerConnected_(Signalling_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  : channel_(channel), rpcmethod_Config_(Signalling_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ConnectPlayer_(Signalling_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_SubscribeToApplicationOffer_(Signalling_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  , rpcmethod_ConnectStreamer_(Signalling_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_SubscribeToPlayerConnected_(Signalling_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  , rpcmethod_SendOfferToPlayer_(Signalling_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
-
-::grpc::Status Signalling::Stub::Connect(::grpc::ClientContext* context, const ::Empty& request, ::Empty* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Connect_, context, request, response);
-}
-
-void Signalling::Stub::async::Connect(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Connect_, context, request, response, std::move(f));
-}
-
-void Signalling::Stub::async::Connect(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Connect_, context, request, response, reactor);
-}
-
-::grpc::ClientAsyncResponseReader< ::Empty>* Signalling::Stub::PrepareAsyncConnectRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Connect_, context, request);
-}
-
-::grpc::ClientAsyncResponseReader< ::Empty>* Signalling::Stub::AsyncConnectRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-  auto* result =
-    this->PrepareAsyncConnectRaw(context, request, cq);
-  result->StartCall();
-  return result;
-}
 
 ::grpc::Status Signalling::Stub::Config(::grpc::ClientContext* context, const ::Empty& request, ::PeerConfig* response) {
   return ::grpc::internal::BlockingUnaryCall< ::Empty, ::PeerConfig, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Config_, context, request, response);
@@ -84,6 +67,68 @@ void Signalling::Stub::async::Config(::grpc::ClientContext* context, const ::Emp
   return result;
 }
 
+::grpc::Status Signalling::Stub::ConnectPlayer(::grpc::ClientContext* context, const ::Empty& request, ::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_ConnectPlayer_, context, request, response);
+}
+
+void Signalling::Stub::async::ConnectPlayer(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_ConnectPlayer_, context, request, response, std::move(f));
+}
+
+void Signalling::Stub::async::ConnectPlayer(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_ConnectPlayer_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::Empty>* Signalling::Stub::PrepareAsyncConnectPlayerRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_ConnectPlayer_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::Empty>* Signalling::Stub::AsyncConnectPlayerRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncConnectPlayerRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::ClientReader< ::Offer>* Signalling::Stub::SubscribeToApplicationOfferRaw(::grpc::ClientContext* context, const ::Empty& request) {
+  return ::grpc::internal::ClientReaderFactory< ::Offer>::Create(channel_.get(), rpcmethod_SubscribeToApplicationOffer_, context, request);
+}
+
+void Signalling::Stub::async::SubscribeToApplicationOffer(::grpc::ClientContext* context, const ::Empty* request, ::grpc::ClientReadReactor< ::Offer>* reactor) {
+  ::grpc::internal::ClientCallbackReaderFactory< ::Offer>::Create(stub_->channel_.get(), stub_->rpcmethod_SubscribeToApplicationOffer_, context, request, reactor);
+}
+
+::grpc::ClientAsyncReader< ::Offer>* Signalling::Stub::AsyncSubscribeToApplicationOfferRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::Offer>::Create(channel_.get(), cq, rpcmethod_SubscribeToApplicationOffer_, context, request, true, tag);
+}
+
+::grpc::ClientAsyncReader< ::Offer>* Signalling::Stub::PrepareAsyncSubscribeToApplicationOfferRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::Offer>::Create(channel_.get(), cq, rpcmethod_SubscribeToApplicationOffer_, context, request, false, nullptr);
+}
+
+::grpc::Status Signalling::Stub::ConnectStreamer(::grpc::ClientContext* context, const ::Streamer& request, ::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::Streamer, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_ConnectStreamer_, context, request, response);
+}
+
+void Signalling::Stub::async::ConnectStreamer(::grpc::ClientContext* context, const ::Streamer* request, ::Empty* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::Streamer, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_ConnectStreamer_, context, request, response, std::move(f));
+}
+
+void Signalling::Stub::async::ConnectStreamer(::grpc::ClientContext* context, const ::Streamer* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_ConnectStreamer_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::Empty>* Signalling::Stub::PrepareAsyncConnectStreamerRaw(::grpc::ClientContext* context, const ::Streamer& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Empty, ::Streamer, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_ConnectStreamer_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::Empty>* Signalling::Stub::AsyncConnectStreamerRaw(::grpc::ClientContext* context, const ::Streamer& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncConnectStreamerRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 ::grpc::ClientReader< ::PlayerConnected>* Signalling::Stub::SubscribeToPlayerConnectedRaw(::grpc::ClientContext* context, const ::Empty& request) {
   return ::grpc::internal::ClientReaderFactory< ::PlayerConnected>::Create(channel_.get(), rpcmethod_SubscribeToPlayerConnected_, context, request);
 }
@@ -100,19 +145,32 @@ void Signalling::Stub::async::SubscribeToPlayerConnected(::grpc::ClientContext* 
   return ::grpc::internal::ClientAsyncReaderFactory< ::PlayerConnected>::Create(channel_.get(), cq, rpcmethod_SubscribeToPlayerConnected_, context, request, false, nullptr);
 }
 
+::grpc::Status Signalling::Stub::SendOfferToPlayer(::grpc::ClientContext* context, const ::Offer& request, ::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::Offer, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_SendOfferToPlayer_, context, request, response);
+}
+
+void Signalling::Stub::async::SendOfferToPlayer(::grpc::ClientContext* context, const ::Offer* request, ::Empty* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::Offer, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_SendOfferToPlayer_, context, request, response, std::move(f));
+}
+
+void Signalling::Stub::async::SendOfferToPlayer(::grpc::ClientContext* context, const ::Offer* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_SendOfferToPlayer_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::Empty>* Signalling::Stub::PrepareAsyncSendOfferToPlayerRaw(::grpc::ClientContext* context, const ::Offer& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Empty, ::Offer, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_SendOfferToPlayer_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::Empty>* Signalling::Stub::AsyncSendOfferToPlayerRaw(::grpc::ClientContext* context, const ::Offer& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncSendOfferToPlayerRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 Signalling::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Signalling_method_names[0],
-      ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Signalling::Service, ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](Signalling::Service* service,
-             ::grpc::ServerContext* ctx,
-             const ::Empty* req,
-             ::Empty* resp) {
-               return service->Connect(ctx, req, resp);
-             }, this)));
-  AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Signalling_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Signalling::Service, ::Empty, ::PeerConfig, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](Signalling::Service* service,
@@ -122,7 +180,37 @@ Signalling::Service::Service() {
                return service->Config(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Signalling_method_names[1],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Signalling::Service, ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Signalling::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::Empty* req,
+             ::Empty* resp) {
+               return service->ConnectPlayer(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
       Signalling_method_names[2],
+      ::grpc::internal::RpcMethod::SERVER_STREAMING,
+      new ::grpc::internal::ServerStreamingHandler< Signalling::Service, ::Empty, ::Offer>(
+          [](Signalling::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::Empty* req,
+             ::grpc::ServerWriter<::Offer>* writer) {
+               return service->SubscribeToApplicationOffer(ctx, req, writer);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Signalling_method_names[3],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Signalling::Service, ::Streamer, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Signalling::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::Streamer* req,
+             ::Empty* resp) {
+               return service->ConnectStreamer(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Signalling_method_names[4],
       ::grpc::internal::RpcMethod::SERVER_STREAMING,
       new ::grpc::internal::ServerStreamingHandler< Signalling::Service, ::Empty, ::PlayerConnected>(
           [](Signalling::Service* service,
@@ -131,19 +219,43 @@ Signalling::Service::Service() {
              ::grpc::ServerWriter<::PlayerConnected>* writer) {
                return service->SubscribeToPlayerConnected(ctx, req, writer);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Signalling_method_names[5],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Signalling::Service, ::Offer, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Signalling::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::Offer* req,
+             ::Empty* resp) {
+               return service->SendOfferToPlayer(ctx, req, resp);
+             }, this)));
 }
 
 Signalling::Service::~Service() {
 }
 
-::grpc::Status Signalling::Service::Connect(::grpc::ServerContext* context, const ::Empty* request, ::Empty* response) {
+::grpc::Status Signalling::Service::Config(::grpc::ServerContext* context, const ::Empty* request, ::PeerConfig* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Signalling::Service::Config(::grpc::ServerContext* context, const ::Empty* request, ::PeerConfig* response) {
+::grpc::Status Signalling::Service::ConnectPlayer(::grpc::ServerContext* context, const ::Empty* request, ::Empty* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Signalling::Service::SubscribeToApplicationOffer(::grpc::ServerContext* context, const ::Empty* request, ::grpc::ServerWriter< ::Offer>* writer) {
+  (void) context;
+  (void) request;
+  (void) writer;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Signalling::Service::ConnectStreamer(::grpc::ServerContext* context, const ::Streamer* request, ::Empty* response) {
   (void) context;
   (void) request;
   (void) response;
@@ -154,6 +266,13 @@ Signalling::Service::~Service() {
   (void) context;
   (void) request;
   (void) writer;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Signalling::Service::SendOfferToPlayer(::grpc::ServerContext* context, const ::Offer* request, ::Empty* response) {
+  (void) context;
+  (void) request;
+  (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 

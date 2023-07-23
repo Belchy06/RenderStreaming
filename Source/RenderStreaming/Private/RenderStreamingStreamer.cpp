@@ -3,8 +3,9 @@
 
 FRenderStreamingStreamer::FRenderStreamingStreamer()
 {
-    this->SignallingObserver = MakeShared<FRenderStreamingSignallingConnectionObserver>();
-    this->SignallingConnection = MakeShared<FRenderStreamingSignallingConnection>(SignallingObserver);
+    SignallingObserver = MakeShared<FRenderStreamingSignallingConnectionObserver>();
+    SignallingConnection = MakeShared<FRenderStreamingSignallingConnection>(SignallingObserver);
+    PeerConnectionConfig = webrtc::PeerConnectionInterface::RTCConfiguration();
 
     SignallingObserver->OnSignallingConnected = [this]()
     {
@@ -13,9 +14,16 @@ FRenderStreamingStreamer::FRenderStreamingStreamer()
 
     SignallingObserver->OnSignallingConfig = [this](const webrtc::PeerConnectionInterface::RTCConfiguration &Config)
     {
-        this->PeerConnectionConfig = Config;
+        PeerConnectionConfig = Config;
         // We want periodic bandwidth probing so ramping happens quickly
-        this->PeerConnectionConfig.media_config.video.periodic_alr_bandwidth_probing = true;
+        PeerConnectionConfig.media_config.video.periodic_alr_bandwidth_probing = true;
+
+        SignallingConnection->SubscribeToPlayerConnected();
+    };
+
+    SignallingObserver->OnSignallingPlayerConnected = [this](FPixelStreamingPlayerId PlayerId, const FPixelStreamingPlayerConfig &PlayerConfig, bool bSendOffer)
+    {
+        OnPlayerConnected(PlayerId, PlayerConfig, bSendOffer);
     };
 
     SignallingObserver->OnSignallingSessionDescription = [this](FPixelStreamingPlayerId PlayerId, webrtc::SdpType Type, const FString &Sdp)
@@ -23,10 +31,7 @@ FRenderStreamingStreamer::FRenderStreamingStreamer()
         // UE_LOG(LogRenderStreaming, Warning, TEXT("Received offer: %s"), *Sdp);
     };
 
-    SignallingObserver->OnSignallingPlayerConnected = [this](FPixelStreamingPlayerId PlayerId, const FPixelStreamingPlayerConfig &PlayerConfig, bool bSendOffer)
-    {
-        this->OnPlayerConnected(PlayerId, PlayerConfig, bSendOffer);
-    };
+    SignallingConnection->TryConnect("localhost:8080");
 }
 
 FRenderStreamingStreamer::~FRenderStreamingStreamer()
@@ -43,6 +48,6 @@ void FRenderStreamingStreamer::OnPlayerConnected(FPixelStreamingPlayerId InPlaye
         return;
     }
 
-    TUniquePtr<FRenderStreamingPeerConnection> PeerConnection = FRenderStreamingPeerConnection::Create(this->PeerConnectionConfig);
+    TUniquePtr<FRenderStreamingPeerConnection> PeerConnection = FRenderStreamingPeerConnection::Create(PeerConnectionConfig);
     Peers.Add(InPlayerId, MakeShared<FRenderStreamingPeer>(MakeShareable(PeerConnection.Release())));
 }
