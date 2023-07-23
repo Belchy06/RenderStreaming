@@ -1,34 +1,24 @@
 syntax = "proto3";
 
-message PlayerConnectedMsg {
-    string playerId = 1;
-}
-
-message OfferMsg {
-    string playerId = 1;
-	string sdp = 2;
-}
-
-message AnswerMsg {
-	string playerId = 1;
-	string sdp = 2;
-}
+option go_package = "./signalling";
 
 message Empty {
 }
 
-message PingMsg {
-    string message = 1;
+message PeerConfig {
+    string peerConnectionOptions = 1;
 }
 
-message PongMsg {
-    string message = 2;
+message PlayerConnected {
+    string playerId = 1;
 }
 
-service SignallingService {
-    rpc Ping(PingMsg) returns (PongMsg) {}
+service Signalling {
+    rpc Connect(Empty) returns (Empty) {}
+    rpc Config(Empty) returns (PeerConfig) {}
 
-    rpc Offer(OfferMsg) returns (Empty) {}
-
-    rpc Answer(AnswerMsg) returns (Empty) {}
+    // Viewer
+    
+    // Application
+    rpc SubscribeToPlayerConnected(Empty) returns (stream PlayerConnected) {}
 }

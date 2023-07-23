@@ -11,8 +11,11 @@
 class FRenderStreamingSignallingConnection : public IPixelStreamingSignallingConnection
 {
 public:
-    FRenderStreamingSignallingConnection(TSharedPtr<IPixelStreamingSignallingConnectionObserver> Observer);
+    FRenderStreamingSignallingConnection(TSharedPtr<IPixelStreamingSignallingConnectionObserver> InObserver);
 
+    void RequestConfig();
+
+    /** IPixelStreamingSignallingConnection Interface */
     virtual void TryConnect(FString URL) override;
     virtual void Disconnect() override;
     virtual bool IsConnected() const override;
@@ -35,8 +38,5 @@ private:
     TSharedPtr<IPixelStreamingSignallingConnectionObserver> Observer;
 
     std::shared_ptr<grpc::Channel> Channel;
-    std::unique_ptr<SignallingService::Stub> Stub;
-
-    FTimerHandle TimerHandle;
-    void KeepAlive();
+    std::unique_ptr<Signalling::Stub> Stub;
 };

@@ -1,9 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.RenderStreaming.cpp.obj": [
-			"RenderStreamingModule.cpp.obj",
-			"RenderStreamingSignallingConnection.cpp.obj"
-		]
-	}
-}

@@ -25,89 +25,98 @@
 #include <grpcpp/impl/codegen/stub_options.h>
 #include <grpcpp/impl/codegen/sync_stream.h>
 
-class SignallingService final {
+class Signalling final {
  public:
   static constexpr char const* service_full_name() {
-    return "SignallingService";
+    return "Signalling";
   }
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    virtual ::grpc::Status Ping(::grpc::ClientContext* context, const ::PingMsg& request, ::PongMsg* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PongMsg>> AsyncPing(::grpc::ClientContext* context, const ::PingMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PongMsg>>(AsyncPingRaw(context, request, cq));
+    virtual ::grpc::Status Connect(::grpc::ClientContext* context, const ::Empty& request, ::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>> AsyncConnect(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>>(AsyncConnectRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PongMsg>> PrepareAsyncPing(::grpc::ClientContext* context, const ::PingMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PongMsg>>(PrepareAsyncPingRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>> PrepareAsyncConnect(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>>(PrepareAsyncConnectRaw(context, request, cq));
     }
-    virtual ::grpc::Status Offer(::grpc::ClientContext* context, const ::OfferMsg& request, ::Empty* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>> AsyncOffer(::grpc::ClientContext* context, const ::OfferMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>>(AsyncOfferRaw(context, request, cq));
+    virtual ::grpc::Status Config(::grpc::ClientContext* context, const ::Empty& request, ::PeerConfig* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PeerConfig>> AsyncConfig(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PeerConfig>>(AsyncConfigRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>> PrepareAsyncOffer(::grpc::ClientContext* context, const ::OfferMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>>(PrepareAsyncOfferRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PeerConfig>> PrepareAsyncConfig(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PeerConfig>>(PrepareAsyncConfigRaw(context, request, cq));
     }
-    virtual ::grpc::Status Answer(::grpc::ClientContext* context, const ::AnswerMsg& request, ::Empty* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>> AsyncAnswer(::grpc::ClientContext* context, const ::AnswerMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>>(AsyncAnswerRaw(context, request, cq));
+    // Viewer
+    //
+    // Application
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::PlayerConnected>> SubscribeToPlayerConnected(::grpc::ClientContext* context, const ::Empty& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::PlayerConnected>>(SubscribeToPlayerConnectedRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>> PrepareAsyncAnswer(::grpc::ClientContext* context, const ::AnswerMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>>(PrepareAsyncAnswerRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::PlayerConnected>> AsyncSubscribeToPlayerConnected(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::PlayerConnected>>(AsyncSubscribeToPlayerConnectedRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::PlayerConnected>> PrepareAsyncSubscribeToPlayerConnected(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::PlayerConnected>>(PrepareAsyncSubscribeToPlayerConnectedRaw(context, request, cq));
     }
     class async_interface {
      public:
       virtual ~async_interface() {}
-      virtual void Ping(::grpc::ClientContext* context, const ::PingMsg* request, ::PongMsg* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Ping(::grpc::ClientContext* context, const ::PingMsg* request, ::PongMsg* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      virtual void Offer(::grpc::ClientContext* context, const ::OfferMsg* request, ::Empty* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Offer(::grpc::ClientContext* context, const ::OfferMsg* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      virtual void Answer(::grpc::ClientContext* context, const ::AnswerMsg* request, ::Empty* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Answer(::grpc::ClientContext* context, const ::AnswerMsg* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void Connect(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Connect(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void Config(::grpc::ClientContext* context, const ::Empty* request, ::PeerConfig* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Config(::grpc::ClientContext* context, const ::Empty* request, ::PeerConfig* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // Viewer
+      //
+      // Application
+      virtual void SubscribeToPlayerConnected(::grpc::ClientContext* context, const ::Empty* request, ::grpc::ClientReadReactor< ::PlayerConnected>* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::PongMsg>* AsyncPingRaw(::grpc::ClientContext* context, const ::PingMsg& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::PongMsg>* PrepareAsyncPingRaw(::grpc::ClientContext* context, const ::PingMsg& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Empty>* AsyncOfferRaw(::grpc::ClientContext* context, const ::OfferMsg& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Empty>* PrepareAsyncOfferRaw(::grpc::ClientContext* context, const ::OfferMsg& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Empty>* AsyncAnswerRaw(::grpc::ClientContext* context, const ::AnswerMsg& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Empty>* PrepareAsyncAnswerRaw(::grpc::ClientContext* context, const ::AnswerMsg& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Empty>* AsyncConnectRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Empty>* PrepareAsyncConnectRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::PeerConfig>* AsyncConfigRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::PeerConfig>* PrepareAsyncConfigRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::PlayerConnected>* SubscribeToPlayerConnectedRaw(::grpc::ClientContext* context, const ::Empty& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::PlayerConnected>* AsyncSubscribeToPlayerConnectedRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::PlayerConnected>* PrepareAsyncSubscribeToPlayerConnectedRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status Ping(::grpc::ClientContext* context, const ::PingMsg& request, ::PongMsg* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PongMsg>> AsyncPing(::grpc::ClientContext* context, const ::PingMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PongMsg>>(AsyncPingRaw(context, request, cq));
+    ::grpc::Status Connect(::grpc::ClientContext* context, const ::Empty& request, ::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>> AsyncConnect(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>>(AsyncConnectRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PongMsg>> PrepareAsyncPing(::grpc::ClientContext* context, const ::PingMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PongMsg>>(PrepareAsyncPingRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>> PrepareAsyncConnect(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>>(PrepareAsyncConnectRaw(context, request, cq));
     }
-    ::grpc::Status Offer(::grpc::ClientContext* context, const ::OfferMsg& request, ::Empty* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>> AsyncOffer(::grpc::ClientContext* context, const ::OfferMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>>(AsyncOfferRaw(context, request, cq));
+    ::grpc::Status Config(::grpc::ClientContext* context, const ::Empty& request, ::PeerConfig* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PeerConfig>> AsyncConfig(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PeerConfig>>(AsyncConfigRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>> PrepareAsyncOffer(::grpc::ClientContext* context, const ::OfferMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>>(PrepareAsyncOfferRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PeerConfig>> PrepareAsyncConfig(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PeerConfig>>(PrepareAsyncConfigRaw(context, request, cq));
     }
-    ::grpc::Status Answer(::grpc::ClientContext* context, const ::AnswerMsg& request, ::Empty* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>> AsyncAnswer(::grpc::ClientContext* context, const ::AnswerMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>>(AsyncAnswerRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientReader< ::PlayerConnected>> SubscribeToPlayerConnected(::grpc::ClientContext* context, const ::Empty& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::PlayerConnected>>(SubscribeToPlayerConnectedRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>> PrepareAsyncAnswer(::grpc::ClientContext* context, const ::AnswerMsg& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>>(PrepareAsyncAnswerRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::PlayerConnected>> AsyncSubscribeToPlayerConnected(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::PlayerConnected>>(AsyncSubscribeToPlayerConnectedRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::PlayerConnected>> PrepareAsyncSubscribeToPlayerConnected(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::PlayerConnected>>(PrepareAsyncSubscribeToPlayerConnectedRaw(context, request, cq));
     }
     class async final :
       public StubInterface::async_interface {
      public:
-      void Ping(::grpc::ClientContext* context, const ::PingMsg* request, ::PongMsg* response, std::function<void(::grpc::Status)>) override;
-      void Ping(::grpc::ClientContext* context, const ::PingMsg* request, ::PongMsg* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void Offer(::grpc::ClientContext* context, const ::OfferMsg* request, ::Empty* response, std::function<void(::grpc::Status)>) override;
-      void Offer(::grpc::ClientContext* context, const ::OfferMsg* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void Answer(::grpc::ClientContext* context, const ::AnswerMsg* request, ::Empty* response, std::function<void(::grpc::Status)>) override;
-      void Answer(::grpc::ClientContext* context, const ::AnswerMsg* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void Connect(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, std::function<void(::grpc::Status)>) override;
+      void Connect(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void Config(::grpc::ClientContext* context, const ::Empty* request, ::PeerConfig* response, std::function<void(::grpc::Status)>) override;
+      void Config(::grpc::ClientContext* context, const ::Empty* request, ::PeerConfig* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void SubscribeToPlayerConnected(::grpc::ClientContext* context, const ::Empty* request, ::grpc::ClientReadReactor< ::PlayerConnected>* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -119,15 +128,16 @@ class SignallingService final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::PongMsg>* AsyncPingRaw(::grpc::ClientContext* context, const ::PingMsg& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::PongMsg>* PrepareAsyncPingRaw(::grpc::ClientContext* context, const ::PingMsg& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Empty>* AsyncOfferRaw(::grpc::ClientContext* context, const ::OfferMsg& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Empty>* PrepareAsyncOfferRaw(::grpc::ClientContext* context, const ::OfferMsg& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Empty>* AsyncAnswerRaw(::grpc::ClientContext* context, const ::AnswerMsg& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Empty>* PrepareAsyncAnswerRaw(::grpc::ClientContext* context, const ::AnswerMsg& request, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::internal::RpcMethod rpcmethod_Ping_;
-    const ::grpc::internal::RpcMethod rpcmethod_Offer_;
-    const ::grpc::internal::RpcMethod rpcmethod_Answer_;
+    ::grpc::ClientAsyncResponseReader< ::Empty>* AsyncConnectRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::Empty>* PrepareAsyncConnectRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::PeerConfig>* AsyncConfigRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::PeerConfig>* PrepareAsyncConfigRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::PlayerConnected>* SubscribeToPlayerConnectedRaw(::grpc::ClientContext* context, const ::Empty& request) override;
+    ::grpc::ClientAsyncReader< ::PlayerConnected>* AsyncSubscribeToPlayerConnectedRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::PlayerConnected>* PrepareAsyncSubscribeToPlayerConnectedRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_Connect_;
+    const ::grpc::internal::RpcMethod rpcmethod_Config_;
+    const ::grpc::internal::RpcMethod rpcmethod_SubscribeToPlayerConnected_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -135,415 +145,413 @@ class SignallingService final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status Ping(::grpc::ServerContext* context, const ::PingMsg* request, ::PongMsg* response);
-    virtual ::grpc::Status Offer(::grpc::ServerContext* context, const ::OfferMsg* request, ::Empty* response);
-    virtual ::grpc::Status Answer(::grpc::ServerContext* context, const ::AnswerMsg* request, ::Empty* response);
+    virtual ::grpc::Status Connect(::grpc::ServerContext* context, const ::Empty* request, ::Empty* response);
+    virtual ::grpc::Status Config(::grpc::ServerContext* context, const ::Empty* request, ::PeerConfig* response);
+    // Viewer
+    //
+    // Application
+    virtual ::grpc::Status SubscribeToPlayerConnected(::grpc::ServerContext* context, const ::Empty* request, ::grpc::ServerWriter< ::PlayerConnected>* writer);
   };
   template <class BaseClass>
-  class WithAsyncMethod_Ping : public BaseClass {
+  class WithAsyncMethod_Connect : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_Ping() {
+    WithAsyncMethod_Connect() {
       ::grpc::Service::MarkMethodAsync(0);
     }
-    ~WithAsyncMethod_Ping() override {
+    ~WithAsyncMethod_Connect() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Ping(::grpc::ServerContext* /*context*/, const ::PingMsg* /*request*/, ::PongMsg* /*response*/) override {
+    ::grpc::Status Connect(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestPing(::grpc::ServerContext* context, ::PingMsg* request, ::grpc::ServerAsyncResponseWriter< ::PongMsg>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestConnect(::grpc::ServerContext* context, ::Empty* request, ::grpc::ServerAsyncResponseWriter< ::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_Offer : public BaseClass {
+  class WithAsyncMethod_Config : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_Offer() {
+    WithAsyncMethod_Config() {
       ::grpc::Service::MarkMethodAsync(1);
     }
-    ~WithAsyncMethod_Offer() override {
+    ~WithAsyncMethod_Config() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Offer(::grpc::ServerContext* /*context*/, const ::OfferMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Config(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::PeerConfig* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestOffer(::grpc::ServerContext* context, ::OfferMsg* request, ::grpc::ServerAsyncResponseWriter< ::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestConfig(::grpc::ServerContext* context, ::Empty* request, ::grpc::ServerAsyncResponseWriter< ::PeerConfig>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_Answer : public BaseClass {
+  class WithAsyncMethod_SubscribeToPlayerConnected : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_Answer() {
+    WithAsyncMethod_SubscribeToPlayerConnected() {
       ::grpc::Service::MarkMethodAsync(2);
     }
-    ~WithAsyncMethod_Answer() override {
+    ~WithAsyncMethod_SubscribeToPlayerConnected() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Answer(::grpc::ServerContext* /*context*/, const ::AnswerMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status SubscribeToPlayerConnected(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::grpc::ServerWriter< ::PlayerConnected>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestAnswer(::grpc::ServerContext* context, ::AnswerMsg* request, ::grpc::ServerAsyncResponseWriter< ::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestSubscribeToPlayerConnected(::grpc::ServerContext* context, ::Empty* request, ::grpc::ServerAsyncWriter< ::PlayerConnected>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(2, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_Ping<WithAsyncMethod_Offer<WithAsyncMethod_Answer<Service > > > AsyncService;
+  typedef WithAsyncMethod_Connect<WithAsyncMethod_Config<WithAsyncMethod_SubscribeToPlayerConnected<Service > > > AsyncService;
   template <class BaseClass>
-  class WithCallbackMethod_Ping : public BaseClass {
+  class WithCallbackMethod_Connect : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_Ping() {
+    WithCallbackMethod_Connect() {
       ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::PingMsg, ::PongMsg>(
+          new ::grpc::internal::CallbackUnaryHandler< ::Empty, ::Empty>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::PingMsg* request, ::PongMsg* response) { return this->Ping(context, request, response); }));}
-    void SetMessageAllocatorFor_Ping(
-        ::grpc::MessageAllocator< ::PingMsg, ::PongMsg>* allocator) {
+                   ::grpc::CallbackServerContext* context, const ::Empty* request, ::Empty* response) { return this->Connect(context, request, response); }));}
+    void SetMessageAllocatorFor_Connect(
+        ::grpc::MessageAllocator< ::Empty, ::Empty>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::PingMsg, ::PongMsg>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::Empty, ::Empty>*>(handler)
               ->SetMessageAllocator(allocator);
     }
-    ~WithCallbackMethod_Ping() override {
+    ~WithCallbackMethod_Connect() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Ping(::grpc::ServerContext* /*context*/, const ::PingMsg* /*request*/, ::PongMsg* /*response*/) override {
+    ::grpc::Status Connect(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* Ping(
-      ::grpc::CallbackServerContext* /*context*/, const ::PingMsg* /*request*/, ::PongMsg* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerUnaryReactor* Connect(
+      ::grpc::CallbackServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithCallbackMethod_Offer : public BaseClass {
+  class WithCallbackMethod_Config : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_Offer() {
+    WithCallbackMethod_Config() {
       ::grpc::Service::MarkMethodCallback(1,
-          new ::grpc::internal::CallbackUnaryHandler< ::OfferMsg, ::Empty>(
+          new ::grpc::internal::CallbackUnaryHandler< ::Empty, ::PeerConfig>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::OfferMsg* request, ::Empty* response) { return this->Offer(context, request, response); }));}
-    void SetMessageAllocatorFor_Offer(
-        ::grpc::MessageAllocator< ::OfferMsg, ::Empty>* allocator) {
+                   ::grpc::CallbackServerContext* context, const ::Empty* request, ::PeerConfig* response) { return this->Config(context, request, response); }));}
+    void SetMessageAllocatorFor_Config(
+        ::grpc::MessageAllocator< ::Empty, ::PeerConfig>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::OfferMsg, ::Empty>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::Empty, ::PeerConfig>*>(handler)
               ->SetMessageAllocator(allocator);
     }
-    ~WithCallbackMethod_Offer() override {
+    ~WithCallbackMethod_Config() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Offer(::grpc::ServerContext* /*context*/, const ::OfferMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Config(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::PeerConfig* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* Offer(
-      ::grpc::CallbackServerContext* /*context*/, const ::OfferMsg* /*request*/, ::Empty* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerUnaryReactor* Config(
+      ::grpc::CallbackServerContext* /*context*/, const ::Empty* /*request*/, ::PeerConfig* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithCallbackMethod_Answer : public BaseClass {
+  class WithCallbackMethod_SubscribeToPlayerConnected : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_Answer() {
+    WithCallbackMethod_SubscribeToPlayerConnected() {
       ::grpc::Service::MarkMethodCallback(2,
-          new ::grpc::internal::CallbackUnaryHandler< ::AnswerMsg, ::Empty>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::Empty, ::PlayerConnected>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::AnswerMsg* request, ::Empty* response) { return this->Answer(context, request, response); }));}
-    void SetMessageAllocatorFor_Answer(
-        ::grpc::MessageAllocator< ::AnswerMsg, ::Empty>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::AnswerMsg, ::Empty>*>(handler)
-              ->SetMessageAllocator(allocator);
+                   ::grpc::CallbackServerContext* context, const ::Empty* request) { return this->SubscribeToPlayerConnected(context, request); }));
     }
-    ~WithCallbackMethod_Answer() override {
+    ~WithCallbackMethod_SubscribeToPlayerConnected() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Answer(::grpc::ServerContext* /*context*/, const ::AnswerMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status SubscribeToPlayerConnected(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::grpc::ServerWriter< ::PlayerConnected>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* Answer(
-      ::grpc::CallbackServerContext* /*context*/, const ::AnswerMsg* /*request*/, ::Empty* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerWriteReactor< ::PlayerConnected>* SubscribeToPlayerConnected(
+      ::grpc::CallbackServerContext* /*context*/, const ::Empty* /*request*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_Ping<WithCallbackMethod_Offer<WithCallbackMethod_Answer<Service > > > CallbackService;
+  typedef WithCallbackMethod_Connect<WithCallbackMethod_Config<WithCallbackMethod_SubscribeToPlayerConnected<Service > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
-  class WithGenericMethod_Ping : public BaseClass {
+  class WithGenericMethod_Connect : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_Ping() {
+    WithGenericMethod_Connect() {
       ::grpc::Service::MarkMethodGeneric(0);
     }
-    ~WithGenericMethod_Ping() override {
+    ~WithGenericMethod_Connect() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Ping(::grpc::ServerContext* /*context*/, const ::PingMsg* /*request*/, ::PongMsg* /*response*/) override {
+    ::grpc::Status Connect(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_Offer : public BaseClass {
+  class WithGenericMethod_Config : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_Offer() {
+    WithGenericMethod_Config() {
       ::grpc::Service::MarkMethodGeneric(1);
     }
-    ~WithGenericMethod_Offer() override {
+    ~WithGenericMethod_Config() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Offer(::grpc::ServerContext* /*context*/, const ::OfferMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Config(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::PeerConfig* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_Answer : public BaseClass {
+  class WithGenericMethod_SubscribeToPlayerConnected : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_Answer() {
+    WithGenericMethod_SubscribeToPlayerConnected() {
       ::grpc::Service::MarkMethodGeneric(2);
     }
-    ~WithGenericMethod_Answer() override {
+    ~WithGenericMethod_SubscribeToPlayerConnected() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Answer(::grpc::ServerContext* /*context*/, const ::AnswerMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status SubscribeToPlayerConnected(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::grpc::ServerWriter< ::PlayerConnected>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithRawMethod_Ping : public BaseClass {
+  class WithRawMethod_Connect : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_Ping() {
+    WithRawMethod_Connect() {
       ::grpc::Service::MarkMethodRaw(0);
     }
-    ~WithRawMethod_Ping() override {
+    ~WithRawMethod_Connect() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Ping(::grpc::ServerContext* /*context*/, const ::PingMsg* /*request*/, ::PongMsg* /*response*/) override {
+    ::grpc::Status Connect(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestPing(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestConnect(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_Offer : public BaseClass {
+  class WithRawMethod_Config : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_Offer() {
+    WithRawMethod_Config() {
       ::grpc::Service::MarkMethodRaw(1);
     }
-    ~WithRawMethod_Offer() override {
+    ~WithRawMethod_Config() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Offer(::grpc::ServerContext* /*context*/, const ::OfferMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Config(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::PeerConfig* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestOffer(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestConfig(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_Answer : public BaseClass {
+  class WithRawMethod_SubscribeToPlayerConnected : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_Answer() {
+    WithRawMethod_SubscribeToPlayerConnected() {
       ::grpc::Service::MarkMethodRaw(2);
     }
-    ~WithRawMethod_Answer() override {
+    ~WithRawMethod_SubscribeToPlayerConnected() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Answer(::grpc::ServerContext* /*context*/, const ::AnswerMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status SubscribeToPlayerConnected(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::grpc::ServerWriter< ::PlayerConnected>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestAnswer(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestSubscribeToPlayerConnected(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(2, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_Ping : public BaseClass {
+  class WithRawCallbackMethod_Connect : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawCallbackMethod_Ping() {
+    WithRawCallbackMethod_Connect() {
       ::grpc::Service::MarkMethodRawCallback(0,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->Ping(context, request, response); }));
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->Connect(context, request, response); }));
     }
-    ~WithRawCallbackMethod_Ping() override {
+    ~WithRawCallbackMethod_Connect() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Ping(::grpc::ServerContext* /*context*/, const ::PingMsg* /*request*/, ::PongMsg* /*response*/) override {
+    ::grpc::Status Connect(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* Ping(
+    virtual ::grpc::ServerUnaryReactor* Connect(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_Offer : public BaseClass {
+  class WithRawCallbackMethod_Config : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawCallbackMethod_Offer() {
+    WithRawCallbackMethod_Config() {
       ::grpc::Service::MarkMethodRawCallback(1,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->Offer(context, request, response); }));
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->Config(context, request, response); }));
     }
-    ~WithRawCallbackMethod_Offer() override {
+    ~WithRawCallbackMethod_Config() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Offer(::grpc::ServerContext* /*context*/, const ::OfferMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Config(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::PeerConfig* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* Offer(
+    virtual ::grpc::ServerUnaryReactor* Config(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_Answer : public BaseClass {
+  class WithRawCallbackMethod_SubscribeToPlayerConnected : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawCallbackMethod_Answer() {
+    WithRawCallbackMethod_SubscribeToPlayerConnected() {
       ::grpc::Service::MarkMethodRawCallback(2,
-          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->Answer(context, request, response); }));
+                   ::grpc::CallbackServerContext* context, const::grpc::ByteBuffer* request) { return this->SubscribeToPlayerConnected(context, request); }));
     }
-    ~WithRawCallbackMethod_Answer() override {
+    ~WithRawCallbackMethod_SubscribeToPlayerConnected() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Answer(::grpc::ServerContext* /*context*/, const ::AnswerMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status SubscribeToPlayerConnected(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::grpc::ServerWriter< ::PlayerConnected>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* Answer(
-      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerWriteReactor< ::grpc::ByteBuffer>* SubscribeToPlayerConnected(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_Ping : public BaseClass {
+  class WithStreamedUnaryMethod_Connect : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithStreamedUnaryMethod_Ping() {
+    WithStreamedUnaryMethod_Connect() {
       ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::PingMsg, ::PongMsg>(
+          ::Empty, ::Empty>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::PingMsg, ::PongMsg>* streamer) {
-                       return this->StreamedPing(context,
+                     ::Empty, ::Empty>* streamer) {
+                       return this->StreamedConnect(context,
                          streamer);
                   }));
     }
-    ~WithStreamedUnaryMethod_Ping() override {
+    ~WithStreamedUnaryMethod_Connect() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Ping(::grpc::ServerContext* /*context*/, const ::PingMsg* /*request*/, ::PongMsg* /*response*/) override {
+    ::grpc::Status Connect(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedPing(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::PingMsg,::PongMsg>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedConnect(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Empty,::Empty>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_Offer : public BaseClass {
+  class WithStreamedUnaryMethod_Config : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithStreamedUnaryMethod_Offer() {
+    WithStreamedUnaryMethod_Config() {
       ::grpc::Service::MarkMethodStreamed(1,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::OfferMsg, ::Empty>(
+          ::Empty, ::PeerConfig>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::OfferMsg, ::Empty>* streamer) {
-                       return this->StreamedOffer(context,
+                     ::Empty, ::PeerConfig>* streamer) {
+                       return this->StreamedConfig(context,
                          streamer);
                   }));
     }
-    ~WithStreamedUnaryMethod_Offer() override {
+    ~WithStreamedUnaryMethod_Config() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Offer(::grpc::ServerContext* /*context*/, const ::OfferMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Config(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::PeerConfig* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedOffer(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::OfferMsg,::Empty>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedConfig(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Empty,::PeerConfig>* server_unary_streamer) = 0;
   };
+  typedef WithStreamedUnaryMethod_Connect<WithStreamedUnaryMethod_Config<Service > > StreamedUnaryService;
   template <class BaseClass>
-  class WithStreamedUnaryMethod_Answer : public BaseClass {
+  class WithSplitStreamingMethod_SubscribeToPlayerConnected : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithStreamedUnaryMethod_Answer() {
+    WithSplitStreamingMethod_SubscribeToPlayerConnected() {
       ::grpc::Service::MarkMethodStreamed(2,
-        new ::grpc::internal::StreamedUnaryHandler<
-          ::AnswerMsg, ::Empty>(
+        new ::grpc::internal::SplitServerStreamingHandler<
+          ::Empty, ::PlayerConnected>(
             [this](::grpc::ServerContext* context,
-                   ::grpc::ServerUnaryStreamer<
-                     ::AnswerMsg, ::Empty>* streamer) {
-                       return this->StreamedAnswer(context,
+                   ::grpc::ServerSplitStreamer<
+                     ::Empty, ::PlayerConnected>* streamer) {
+                       return this->StreamedSubscribeToPlayerConnected(context,
                          streamer);
                   }));
     }
-    ~WithStreamedUnaryMethod_Answer() override {
+    ~WithSplitStreamingMethod_SubscribeToPlayerConnected() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Answer(::grpc::ServerContext* /*context*/, const ::AnswerMsg* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status SubscribeToPlayerConnected(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::grpc::ServerWriter< ::PlayerConnected>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedAnswer(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::AnswerMsg,::Empty>* server_unary_streamer) = 0;
+    // replace default version of method with split streamed
+    virtual ::grpc::Status StreamedSubscribeToPlayerConnected(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::Empty,::PlayerConnected>* server_split_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_Ping<WithStreamedUnaryMethod_Offer<WithStreamedUnaryMethod_Answer<Service > > > StreamedUnaryService;
-  typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_Ping<WithStreamedUnaryMethod_Offer<WithStreamedUnaryMethod_Answer<Service > > > StreamedService;
+  typedef WithSplitStreamingMethod_SubscribeToPlayerConnected<Service > SplitStreamedService;
+  typedef WithStreamedUnaryMethod_Connect<WithStreamedUnaryMethod_Config<WithSplitStreamingMethod_SubscribeToPlayerConnected<Service > > > StreamedService;
 };
 
 
